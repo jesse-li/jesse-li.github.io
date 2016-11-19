@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+        <meta name="Keywords" content="热门游戏,手游,游戏,代金券,诛仙，阴阳师,劲舞团,谁是卧底,礼包"/>
+        <meta name="Description" content="洽洽乐园_游乐场"/>
+        <link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/qiaqia/img/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="css/reste.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>
+        <title>游乐场_洽洽乐园[洽洽]</title>
+    </head>
+    <body class="ylc">
+    	<section class="con">
+			<header class="header">
+				<a  id="returnBtn"  href="javascript:void(0)" target="_self" class="bg"></a>
+				<span>游乐场</span>
+				<i class="bg"></i>
+			</header>
+        <article>
+            <ul id="ylyList">
+                
+            </ul>
+        </article>
+       </section>
+       <script id="listDemo" type="text/html">
+       	[:for(var i=0,j=list.length;i<j;i+=1){:]
+       		<li class="clearfix">
+                <div>
+                	<img src="[:=list[i].img:]" alt="" />
+                	</div>
+                    <p>
+                        <span>[:=list[i].txt:]</span>
+                        <span class="font">[:=list[i].con:]</span>
+                    </p>
+                    [:if(list[i].type === "h5"){:]
+                    	<a class="begin" href="javascript:">开始</a>
+                    [:}else{:]
+                   		<a class="download" href="[:=list[i].href:]">下载</a>
+                    [:}:]
+                    
+                </li>
+       	[:}:]
+       </script>
+        <script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/wechat.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+        	var data={
+        		list:[
+        		{img:"img/yly/game1.png",type:"apk",txt:"放开那三国2",con:"冠绝三国，不负王名！",href:"http://res5.d.cn/geng/101789/com.babeltime.fknsg2.dl-5591-signed.apk"},
+        		{img:"img/yly/game2.png",type:"apk",txt:"劲舞团",con:"多种风格服饰装扮、海量全新流行音乐，做潮流时尚达人",href:"http://res5.d.cn/geng/101789/com.netease.ma59.downjoy-5-signed.apk"},
+        		{img:"img/yly/game3.png",type:"apk",txt:"谁是卧底",con:"史上最萌的天黑请闭眼&杀人游戏",href:"http://res5.d.cn/geng/101789/com.qbankilltext.downjoy-1000003-signed.apk"},
+        		{img:"img/yly/game4.png",type:"apk",txt:"阴阳师",con:"网易和风匠心巨制，开启唯美奇幻之旅",href:"http://res5.d.cn/geng/101789/com.netease.onmyoji.downjoy-10-signed.apk"},
+        		{img:"img/yly/game5.png",type:"apk",txt:"诛仙",con:"首款可自由御空飞行3DMMORPG修仙手游",href:"http://res5.d.cn/geng/101789/com.wanmei.zhuxian.dangle-1066-signed.apk"}
+        		]
+        	};
+        	$("#ylyList").append(tppl($("#listDemo").html(),data));
+        	var returnBtn = document.getElementById("returnBtn");
+			returnBtn.addEventListener("click",function(){
+				window.history.go(-1);
+			},false);
+		
+        </script>
+    </body>
+</html>

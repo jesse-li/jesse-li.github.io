@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="renderer" content="webkit" />
+		<meta name="Keywords" content="洽洽乐园,阴阳师,抽奖,点击参与,红包,诛仙,代金券,手游,礼包"/>
+		<meta name="Description" content="洽洽乐园送豪礼！即刻点击抽奖。"/>
+		<link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/qiaqia/img/favicon.ico">
+		<title>洽洽乐园抽奖送豪礼！[洽洽]</title>
+		<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body class="has">
+		<section class="con">
+			<img class="logo" src="img/logo.png"/>
+			<div class="bg3">
+				<img src="img/bg3.png"/>
+			</div>
+			<img class="bg4" src="img/bg4.png"/>
+			<section id="acList" class="ac-list">
+				<div class="my-wrapper">
+					
+				</div>
+			</section>
+			<!--<p class="index-tip">您还有<em>3</em>次抽奖机会</p>-->
+			<a href="./detail.html" id="indexBtn" class="index-btn"></a>
+			<section class="other-btn clearfix">
+				<a class="ylc" href="./youlechang.html" target="_self"></a>
+				<a class="pd" href="javascript:void(0)" target="_blank"></a>
+			</section>
+		</section>
+		<!--<section id="phoneCheck" class="dn">
+			<a class="closeBtn bg" href="javascript:void(0)" target="_self"></a>
+			<h3>抽奖提示</h3>
+			<p>请输入您的手机号码</p>
+			<input type="tel" id="" value="" />
+			<p>请将滑块移动到正确的位置</p>
+			<div id="dragverify"></div>
+			<div class="phone-tip">
+				<p>为什么要验证手机<p>
+				<span>为了确保奖品能购准确便捷的发放给您,手机号将作为您
+的唯一标识,您的信息不会被泄露给任何人,请放心使用.</span>
+			</div>
+		</section>-->
+		<!--<div class="banner dn"></div>-->
+		<img class="bg2" src="img/bg2.png"/>
+		<script id="swiperDemo" type="text/html">
+			[:for(var i = 0,j = data.length;i<j;i+=1){:]
+				<p class="swiper-slide stop-swiping">恭喜 [:=data[i].nickName:] 获得[:=data[i].thingName:]</p>
+			[:}:]
+		</script>
+		<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/swiper.jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="http://static.geetest.com/static/tools/gt.js"></script>-->
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/wechat.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script type="text/javascript">
+		var baseUrl = "http://192.168.29.131:8080/dj-cd-pply/";
+	               	
+			/*中奖信息轮播*/
+                (function(){
+                	var $sDemo = $("#swiperDemo").html(),
+	               	$swiper = $(".my-wrapper"),
+	               	$list = $('#acList'),
+	               	swiper;
+	               $.ajax({
+	               		type:"get",
+	               		url:baseUrl+"qiaqia/listWinners.html?size=10",
+	               		dataType:"json"
+	               }).done(function(res){
+	               	var html,data = {data:res}
+	               	html = tppl($sDemo,data);
+	               		$swiper.append(html);
+	               		$(window).on('resize.swiper', function () {
+	                        swiper = new Swiper($list, {
+	                            direction: 'vertical',
+	                            lazyLoading: true,
+	                            lazyLoadingOnTransitionStart: true,
+	                            lazyLoadingInPrevNext: true,
+	                            wrapperClass: 'my-wrapper',
+	                            noSwiping: true,
+	                            loop: true,
+	                            noSwipingClass: 'stop-swiping',
+	                            autoplay: 5000,
+	                            speed: 300,
+	                            autoHeight: true,
+	                            setWrapperSize:true
+	                        });
+	                    }).triggerHandler('resize.swiper');
+	               }).fail(function(res){
+	               	
+	               })
+                })();
+                /*点击抽奖相关判断*/
+               (function(){
+               	var $indexBtn = $("#indexBtn"),
+               		$phoneCheck = $("#phoneCheck"),
+               		$banner = $(".banner");
+               		$indexBtn.on("click",function(){
+               			$.ajax({
+	               			type:"get",
+	               			url:baseUrl+"qiaqia/checkUser.html",
+	               			async:true
+	               		}).done(function(res){
+	               			var res=res&&JSON.parse(res);
+	               			if(res.code === 202){
+	               				getImgCode();
+	               				$banner.fadeIn(100);
+	               				$phoneCheck.fadeIn(100);
+	               			}
+	               		}).fail(function(){});
+               		});
+               		function getImgCode(){
+               			
+               			
+               			$.ajax({
+					        // 获取id，challenge，success（是否启用failback）
+					        url: baseUrl+"geetest/startCaptcha.html",
+					        type: "get",
+					        dataType: "json",
+					        success: function (data) {
+					
+					            // 使用initGeetest接口
+					            // 参数1：配置参数
+					            // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+					            initGeetest({
+					                gt: data.gt,
+					                challenge: data.challenge,
+					                product: "embed", // 产品形式，包括：float，embed，popup。注意只对PC版验证码有效
+					                offline: !data.success, // 表示用户后台检测极验服务器是否宕机，一般不需要关注
+					               width: "100%"
+					            }, handlerEmbed);
+					        }
+					    });
+               		}
+               		function handlerEmbed(captchaObj){
+               			captchaObj.appendTo("#dragverify");
+               			captchaObj.onSuccess(function(){
+               				var phoneNum = $("input[type='tel']").val();
+               				if(phoneNum === ""||phoneNum.length!==11){
+               					captchaObj.refresh();
+               					return false;
+               				}
+						console.log(captchaObj.getValidate())
+						$.ajax({
+							url:baseUrl+"qiaqia/checkPhone.html",
+							type:"get",
+							dataType:"json",
+							data:{
+								phone:phoneNum,
+								geetest_challenge:captchaObj.getValidate().geetest_challenge,
+								geetest_validate:captchaObj.getValidate().geetest_validate,
+								geetest_seccode:captchaObj.getValidate().geetest_seccode
+							}
+						}).done(function(res){
+							console.log(res)
+							window.location.pathname = "detail.html"
+						});
+					})
+               		}
+               })();
+               		
+              
+		</script>-->
+		<!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript">
+			(function(){
+				swiper.init();
+				/*if(true){
+					var script = document.createElement("script");
+					script.addEventListener("load",function(){
+						console.log("loaded")
+					},false)
+					script.src = "http://res.wx.qq.com/open/js/jweixin-1.0.0.js";
+					document.body.appendChild(script);*/
+					/*$("head").append('<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8">');*/
+					/*wx.config({
+					    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					    appId: '', // 必填，公众号的唯一标识
+					    timestamp:'' , // 必填，生成签名的时间戳
+					    nonceStr: '', // 必填，生成签名的随机串
+					    signature: '',// 必填，签名，见附录1
+					    jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+					});
+					wx.ready(function(){
+						wx.onMenuShareTimeline({
+						    title: 'pengyouquan', // 分享标题
+						    link: 'http://baidu.com', // 分享链接
+						    imgUrl: 'img/bg2.png', // 分享图标
+						    success: function () { 
+						        // 用户确认分享后执行的回调函数
+						        $("body").append("pengyouquan");
+						    },
+						    cancel: function () { 
+						        // 用户取消分享后执行的回调函数
+						        $("body").append("pengyouquan-shibai");
+						    }
+						});
+						wx.onMenuShareAppMessage({
+						    title: 'pengyou', // 分享标题
+						    desc: 'sssssssssssss', // 分享描述
+						    link: 'http://baidu.com', // 分享链接
+						    imgUrl: 'img/bg2.png', // 分享图标
+						    type: '', // 分享类型,music、video或link，不填默认为link
+						    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+						    success: function () { 
+						        // 用户确认分享后执行的回调函数
+						         $("body").append("pengyou");
+						    },
+						    cancel: function () { 
+						        // 用户取消分享后执行的回调函数
+						         $("body").append("pengyou-shibai");
+						    }
+						});
+					});
+					wx.error(function(res){
+						alert(res)
+					});*/
+				/*}*/
+			})();
+		</script>
+	</body>
+</html>

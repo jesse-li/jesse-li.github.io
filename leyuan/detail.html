@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="renderer" content="webkit" />
+		<meta name="Keywords" content="洽洽乐园,洽洽,抽奖,点击参与,热门游戏,代金券,手游,礼包"/>
+		<meta name="Description" content="洽洽乐园送豪礼！点击立即参与抽奖。"/>
+		<title>抽奖送豪礼_洽洽乐园[洽洽]</title>
+		<link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/qiaqia/img/favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body class="has">
+		<section class="con detail">
+			<a id="returnBtn" class="return-btn bg" href="javascript:void(0)" target="_self"></a>
+			<!--<a href="javascript:void(0)" class="query-btn" target="_self">中奖查询</a>-->
+			<img class="logo" src="img/logo.png"/>
+			<section id="acList" class="ac-list">
+				<div class="my-wrapper">
+					
+				</div>
+			</section>
+			<p class="index-tip">您还有<em>0</em>次抽奖机会<i class="bg"></i></p>
+			<section class="cj-box">
+				<ul class="clearix">
+					<li data-id="1">
+						<div>
+							<p>游戏礼包</p>
+							<img src="img/demo/cj1.jpg"/>
+						</div>
+					</li>
+					<li data-id="2">
+						<div>
+							<p>100元话费</p>
+							<img src="img/demo/cj2.jpg"/>
+						</div>
+					</li>
+					<li data-id="3"> 
+						<div>
+							<p>钱大掌柜</p>
+							<img src="img/demo/cj3.png"/>
+						</div>
+					</li>
+					<li data-id="8">
+						<div>
+							<p>途牛旅游券</p>
+							<img src="img/demo/cj8.png"/>
+						</div>
+					</li>
+					<li class="cj-btn">
+						
+					</li>
+					<li data-id="4">
+						<div>
+							<p>有赞折扣券</p>
+							<img src="img/demo/cj4.png"/>
+						</div>
+					</li>
+					<li data-id="7">
+						<div>
+							<p>神州专车</p>
+							<img src="img/demo/cj7.png"/>
+						</div>
+					</li>
+					<li data-id="6">
+						<div>
+							<p>iphone7</p>
+							<img src="img/demo/cj6.png"/>
+						</div>
+					</li>
+					<li data-id="5">
+						<div>
+							<p>游戏代金券</p>
+							<img src="img/demo/cj5.jpg"/>
+						</div>
+					</li>
+				</ul>
+			</section>
+			<section class="detail-btn clearfix">
+				<a class="fl" href="javascript:void(0)" target="_self">活动说明</a>
+				<a class="fr" href="./jp.html" target="_self">我的礼品</a>
+			</section>
+		</section>
+		<img class="bg2" src="img/bg2.png"/>
+		<div class="banner dn"></div>
+		<section id="cjTip" class="dn">
+			<a class="closeBtn bg" href="javascript:void(0)" target="_self"></a>
+			<h3>抽奖提示</h3>
+			<p>1.每位用户可以立即获得1次抽奖机会；</p>
+			<p>2.分享活动至微信朋友圈,即可再增加一次抽奖机会；</p>
+			<p>3.每日抽奖次数上限为2次。</p>
+		</section>
+		<section id="phoneCheck" class="dn">
+			<a class="closeBtn bg" href="javascript:void(0)" target="_self"></a>
+			<h3>手机验证</h3>
+			<p>请输入您的手机号码</p>
+			<input type="tel" id="" value="" />
+			<p>请将滑块移动到正确的位置</p>
+			<div id="dragverify"></div>
+			<div class="phone-tip">
+				<p>为什么要验证手机<p>
+				<span>为了确保奖品能够准确便捷的发放给您,手机号将作为您
+的唯一标识,您的信息不会被泄露给任何人,请放心使用.</span>
+			</div>
+		</section>
+		<section id="timesError" class="times-error dn">
+			<div>
+				<img data-url="img/times.png" src="img/times.png"/>
+				<p>对不起</p>
+				<p>抽奖次数用完啦</p>
+				<p>下次再来哦</p>
+			</div>
+		</section>
+		<script id="swiperDemo" type="text/html">
+			[:for(var i = 0,j = data.length;i<j;i+=1){:]
+				<p class="swiper-slide stop-swiping">恭喜 [:=data[i].nickName:] 获得[:=data[i].thingName:]</p>
+			[:}:]
+		</script>
+		<script id="resultTem" type="text/html">
+			<section id="cjResult">
+				<!--<a class="closeBtn bg" href="javascript:void(0)" target="_self"></a>-->
+				[:if(sort === 1){:]
+					<!--//游戏礼包-->
+					<p class="result-tit">恭喜您，获得[:=merchandise.name:]</p>
+					<img src="[:=merchandise.image.replace(/,/g,''):]"/>
+					
+				[:}else if(sort === 2){:]
+					<!--//话费-->
+					<p class="result-tit">恭喜您，获得话费</p>
+					<img src="img/demo/cj2.jpg"/>
+				[:}else if(sort === 3){:]
+					<!--//钱大掌柜-->
+					<p class="result-tit">恭喜您，获得钱大掌柜</p>
+					<img src="img/demo/cj3.png"/>
+				[:}else if(sort === 4){:]
+					<!--//有赞折扣券-->
+					<p class="result-tit">恭喜您，获得有赞折扣券</p>
+					<img src="img/demo/cj4.png"/>
+					<!--<img src="img/demo/jp1.jpg"/>-->
+				[:}else if(sort === 5){:]	
+					<!--//游戏代金券-->
+					<p class="result-tit">恭喜您，获得游戏代金券</p>
+					<img src="[:=merchandise.image.replace(/,/g,''):]"/>
+				[:}else if(sort === 6){:]
+					<!--//iphone7-->
+					<p class="result-tit">谢谢参与</p>
+				[:}else if(sort === 7){:]
+					<!--//神州专车-->
+					<p class="result-tit">恭喜您，获得神州专车</p>
+					<img src="img/demo/cj7.png"/>
+				[:}else if(sort === 8){:]
+					<!--//途牛旅游券-->
+					<p class="result-tit">恭喜您，获得途牛旅游券</p>
+					<img src="img/demo/cj8.png"/>
+				[:}:]
+				[:if(sort !== 6){:]
+					<a class="get-btn" href="[:=url:]" target="_self">点击领取</a>
+				[:}:]
+			</section>
+		</script>
+		<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/swiper.jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://static.geetest.com/static/tools/gt.js"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/wechat.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*var $list = $('#acList'),
+                        swiper;
+                    $(window).on('resize.swiper', function () {
+                        swiper = new Swiper($list, {
+                            direction: 'vertical',
+                            lazyLoading: true,
+                            lazyLoadingOnTransitionStart: true,
+                            lazyLoadingInPrevNext: true,
+                            wrapperClass: 'my-wrapper',
+                            noSwiping: true,
+                            loop: true,
+                            noSwipingClass: 'stop-swiping',
+                            autoplay: 5000,
+                            speed: 300,
+                            autoHeight: true,
+                            setWrapperSize:true
+                        });
+                    }).triggerHandler('resize.swiper');
+                  //抽奖相关
+                 (function(){
+                 	var $btn = $(".cj-btn"),timer,t = true,count = 1,aLi = $("li[data-id]");
+                 	
+                 	//本地生成随机数测试
+                 	
+                 	var data={
+                 		data1:{
+                 			type:1,
+                 			href:"http://baidu.com"
+                 		},
+                 		data2:{
+                 			type:2,
+                 			href:"http://baidu.com"
+                 		},
+                 		data3 :{
+                 		type:3,
+                 		href:"http://baidu.com"
+                 	},
+                 	data4 : {
+                 		type:4,
+                 		href:"http://baidu.com"
+                 	},
+                 	data5 :{
+                 		type:5,
+                 		href:"http://baidu.com"
+                 	},
+                 	data7 :{
+                 		type:7,
+                 		num:20,
+                 		href:"http://baidu.com"
+                 	},
+                 	data8:{
+                 		type:8,
+                 		list:[{img:'http://uus-img1.android.d.cn/content_pic/201610/behpic/icon/529/1-74529/icon-1477472632266.png',txt:"随时随刻",name:"啊啊啊",href:"http://baidu.com"},{img:'http://uus-img1.android.d.cn/content_pic/201610/behpic/icon/529/1-74529/icon-1477472632266.png',txt:"随时随刻",name:"啊啊啊",href:"http://baidu.com"},{img:'http://uus-img1.android.d.cn/content_pic/201610/behpic/icon/529/1-74529/icon-1477472632266.png',txt:"随时随刻",name:"啊啊啊",href:"http://baidu.com"},{img:'http://uus-img1.android.d.cn/content_pic/201610/behpic/icon/529/1-74529/icon-1477472632266.png',txt:"随时随刻",name:"啊啊啊2",href:"http://baidu.com"},{img:'http://uus-img1.android.d.cn/content_pic/201610/behpic/icon/529/1-74529/icon-1477472632266.png',txt:"随时随刻",name:"啊啊啊2",href:"http://baidu.com"},{img:'http://uus-img1.android.d.cn/content_pic/201610/behpic/icon/529/1-74529/icon-1477472632266.png',txt:"随时随刻",name:"啊啊啊2",href:"http://baidu.com"}]
+                 	}
+                 	}
+                 	function test(){
+                 		var num = parseInt(Math.random()*10);
+                 		if(num === 9||num === 6||num === 0){
+                 			num = 8;
+                 		}
+                 		return num;
+                 	}
+                 	
+                 	
+                 	$btn.on("click",function(){
+                 		if(t === true){
+                 			t = false;
+                 			var type = test();
+                 			start(type,data);
+                 		}else{
+                 			return false;
+                 		}
+                 	});
+                 	function start(type){
+                 		if(count === 9){
+                 			count = 1;
+                 		}
+                 		aLi.removeClass("curr");
+             			$("li[data-id='"+count+"']").addClass("curr");
+             			if(count === type){
+             				setTimeout(function(){
+             					var html = tppl($("#resultTem").html(),data["data"+8]);
+	             				$("body").append(html);
+	             				$(".banner").show();
+             				},300)
+             				
+             			}else{
+             				count += 1;
+             				timer = setTimeout(function(){
+             					start(type);
+             				},200)
+             			}
+             		}*/
+                 	/*$("document").on("click",".closeBtn",function(){
+                 		$(this).parent().remove();
+                 	})*/
+                 	/*去掉.closeBtn的关闭功能*/
+                 	/*$(document).on("click",".closeBtn",function(){
+                 		$(this).parent().remove();
+                 		$(".banner").hide();
+                 		t = true;
+                 		count = 1;
+                 		aLi.removeClass("curr")
+                 	});
+                 	$(document).on("click","#gameChange",function(){
+                 		$(".game-list.dn").siblings(".game-list").hide();
+                 		$(".game-list.dn").fadeIn(200,function(){
+                 			$(".game-list.dn").removeClass("dn").siblings(".game-list").addClass("dn")
+                 		})
+                 	});
+                 })();*/
+                 //滑块验证
+                
+				/*(function($){
+				    $.fn.dragverify = function(params){
+				        var x ;
+				        var dragverify = this;
+				        var moveFlag = false;
+				        var defaults = {};
+				        var params = $.extend(defaults,params);
+				        var htmls = '<div class="dragverifybg"></div><div class="dragverifytext" onselectstart="return false;" unselectable="on">拖动滑块验证</div><div class="block blockbg"></div>';
+				
+				        this.append(htmls);
+				
+				        var block = dragverify.find(".block");
+				        var dragverifybg = dragverify.find(".dragverifybg");
+				        var drafverifytext = dragverify.find(".dragverifytext");
+				        var maxWidth = dragverify.width() - block.width();
+				        block.on("touchstart",function(e){
+				            moveFlag = true;
+				            x = e.originalEvent.touches[0].pageX - parseInt(block.css("left"),10);
+				
+				        })
+				
+				
+						block.on("touchmove",function(e){
+				             moveX = e.originalEvent.touches[0].pageX - x;
+				            if(moveFlag){
+				                if(moveX > 0 && moveX < maxWidth){
+				                    block.css({"left":moveX});
+				                    dragverifybg.css({"width":moveX});
+				                }else if(moveX > maxWidth){
+				                    verifySuc();
+				                }
+				            }
+				        });
+				        block.on("touchend",function(e){
+				            moveFlag = false;
+				            if(moveX < maxWidth){
+				                block.css({"left":0});
+				                dragverifybg.css({"width":0});
+				            }
+				        });
+				        function verifySuc(){
+				            block.removeClass("blockbg").addClass("blockbgsuc");
+				            drafverifytext.text("验证通过");
+				            dragverify.css({"color":"#ffffff"});
+				            block.off("touchstart");
+				            block.off("touchmove");
+				            block.off("touchend");
+				        }
+				
+				    }
+				})(jQuery);
+			$("#dragverify").dragverify();*/
+            ;(function(){
+            	var $cjBtn = $(".cj-btn");
+            	swiper.init();
+            	checkFlow.checkUser(function(res){
+            		$("#phoneCheck").addClass("dn");
+            		$(".banner").addClass("dn");
+            	});
+            	$cjBtn.on("click",function(){
+            		playF.init({
+            			aLi:$("li[data-id]"),
+            			timesError:$("#timesError"),
+            			tipHtml:$("#resultTem").html(),
+            			banner:$(".banner"),
+            			CurrClassName:"curr"
+            		});
+            	});
+            	/*$(document).on("click","#gameChange",function(){
+             		$(".game-list.dn").siblings(".game-list").hide();
+             		$(".game-list.dn").fadeIn(200,function(){
+             			$(".game-list.dn").removeClass("dn").siblings(".game-list").addClass("dn")
+             		})
+             	});*/
+             	var $cjAndbanner = $("#cjTip,.banner");
+             	$(".index-tip").find("i").on("click",function(){
+             		if(playF.t === true){
+             			$cjAndbanner.removeClass("dn");
+             		}
+             		
+             	});
+            })();
+		</script>
+	</body>
+</html>

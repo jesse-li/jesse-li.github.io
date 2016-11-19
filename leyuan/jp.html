@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="renderer" content="webkit" />
+		<meta name="Keywords" content="洽洽,抽奖,手游,神州专车,代金券,礼包,红包,奖品"/>
+		<meta name="Description" content="洽洽乐园_我的奖品"/>
+		<link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/qiaqia/img/favicon.ico">
+		<title>我的奖品_洽洽乐园[洽洽]</title>
+		<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body class="has">
+		<section class="con">
+			<header class="header">
+				<a  id="returnBtn"  href="javascript:void(0)" target="_self" class="bg"></a>
+				<span>我的奖品</span>
+				<i class="bg"></i>
+			</header>
+			<ul class="jp-list">
+				<!--<li class="clearfix">
+					<div class="jp-info">
+						<p>有效期：<em>2015-05-18--2015-06-19</em></p>
+						<div>
+							<img src="img/demo/jp1.png"/>
+							<span>滴滴10元代金券</span>
+						</div>
+					</div>
+					<a href="javascript:void(0)" target="_blank">查看<i class="bg"></i></a>
+				</li>
+				<li class="clearfix">
+					<div class="jp-info">
+						<p>有效期：<em>2015-05-18--2015-06-19</em></p>
+						<div>
+							<img src="img/demo/jp2.png"/>
+							<span>滴滴10元代金券</span>
+						</div>
+					</div>
+					<a href="javascript:void(0)" target="_blank">查看<i class="bg"></i></a>
+				</li>
+				<li class="clearfix">
+					<div class="jp-info">
+						<p>有效期：<em>2015-05-18--2015-06-19</em></p>
+						<div>
+							<img src="img/demo/jp3.png"/>
+							<span>滴滴10元代金券</span>
+						</div>
+					</div>
+					<a href="javascript:void(0)" target="_blank">查看<i class="bg"></i></a>
+				</li>
+				<li class="clearfix">
+					<div class="jp-info">
+						<p>有效期：<em>2015-05-18--2015-06-19</em></p>
+						<div>
+							<img src="img/demo/jp1.png"/>
+							<span>滴滴10元代金券</span>
+						</div>
+					</div>
+					<a href="javascript:void(0)" target="_blank">查看<i class="bg"></i></a>
+				</li>
+				<li class="clearfix">
+					<div class="jp-info">
+						<p>有效期：<em>2015-05-18--2015-06-19</em></p>
+						<div>
+							<img src="img/demo/jp2.png"/>
+							<span>滴滴10元代金券</span>
+						</div>
+					</div>
+					<a href="javascript:void(0)" target="_blank">查看<i class="bg"></i></a>
+				</li>
+				<li class="clearfix">
+					<div class="jp-info">
+						<p>有效期：<em>2015-05-18--2015-06-19</em></p>
+						<div>
+							<img src="img/demo/jp3.png"/>
+							<span>滴滴10元代金券</span>
+						</div>
+					</div>
+					<a href="javascript:void(0)" target="_blank">查看<i class="bg"></i></a>
+				</li>-->
+			</ul>
+		</section>
+		<section id="phoneCheck" class="dn">
+			<a class="closeBtn bg" href="javascript:void(0)" target="_self"></a>
+			<h3>手机验证</h3>
+			<p>请输入您的手机号码</p>
+			<input type="tel" id="" value="" />
+			<p>请将滑块移动到正确的位置</p>
+			<div id="dragverify"></div>
+			<div class="phone-tip">
+				<p>为什么要验证手机<p>
+				<span>为了确保奖品能够准确便捷的发放给您,手机号将作为您
+的唯一标识,您的信息不会被泄露给任何人,请放心使用.</span>
+			</div>
+		</section>
+		<div class="banner dn"></div>
+		<img class="bg2" src="img/bg2.png"/>
+		<script id="jpDemo" type="text/html">
+			[:for(var i=0,j=data.length;i<j;i+=1){:]
+				<li class="clearfix">
+					<div class="jp-info">
+						<p>中奖时间：<em>[:=new Date(data[i].winner.winTime).getFullYear():]-[:=new Date(data[i].winner.winTime).getMonth()+1:]-[:=new Date(data[i].winner.winTime).getDate():]</em></p>
+						<div>
+							<img src="[:=data[i].merchandise.image.replace(/,/g,''):]"/>
+							<span>[:=data[i].merchandise.name:]</span>
+						</div>
+					</div>
+					[:if(data[i].merchandise.category=='VOUCHER'||data[i].merchandise.category=='GIFT_SET'){:]
+						<a href="detailPrize.html?id=[:=data[i].winner.id:]" target="_self">查看<i class="bg"></i></a>
+					[:}else if(data[i].merchandise.category == 'OTHER'){:]
+						<a href="http://mktm.10101111.com/html5/2016/template_3/index.html?sharefrom=luotuoma160&szhdbm=BD.luotuoma160" target="_self">查看<i class="bg"></i></a>
+					[:}:]
+					
+				</li>
+			[:}:]
+			
+		</script>
+		<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://static.geetest.com/static/tools/gt.js"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/wechat.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			;(function(){
+				checkFlow.checkUser(function(){
+					$("#phoneCheck").addClass("dn");
+            		$(".banner").addClass("dn");
+            		jpLoad();
+				},function(){
+					jpLoad();
+				});
+			})();
+		</script>
+	</body>
+</html>
