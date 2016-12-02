@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+    <title>乐园资讯</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/huangpin/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body class="bgGreen" style="height:auto">
+<div class="top">
+	<a onclick="window.history.go(-1)" href="javascript:;" target="_self">
+    	返回
+    </a>
+    <h3>乐园资讯</h3>
+</div>
+<div class="list-consult">
+	<ul id="thelist"></ul>
+</div>
+	
+    
+    <script type="text/html" id="infoDemo">
+    	[:for(var i=0,j=data.length;i<j;i+=1){:]
+    		<li>
+			  <a href="detailNews.html?id=[:=data[i].id:]" target="_self">	
+				<div class="img-consult">
+					<img src="[:=data[i].bgImg:]">
+				</div>
+				<h2>[:=data[i].title:]</h2>
+			  </a>
+	        </li> 
+    	[:}:]
+        
+    </script> 
+    <script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/wechatHidden.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+	$(function(){
+		var pageNo = 1,html=$("#infoDemo").html(),obj=$("#thelist");
+		listLoad({
+			url:"huangpin/listNews.json?pageNo="+pageNo,
+			callback:function(res){
+				if(res.data.length>0){
+					var tppHtml = tppl(html,res);
+					obj.append(tppHtml);
+				}else{
+					$(window).off("scroll");
+				}
+			}
+		});
+		$(window).on('scroll',function(){
+		 	if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+				console.log('bottom!!');
+				pageNo += 1;
+				listLoad({
+					url:"huangpin/listNews.json?pageNo="+pageNo,
+					callback:function(res){
+						if(res.data.length>0){
+							var tppHtml = tppl(html,res);
+							obj.append(tppHtml);
+						}else{
+							$(window).off("scroll");
+						}
+						
+					}
+				});
+			}
+ 		});
+	})
+			
+	</script>
+    <script>
+		
+	</script>
+  </body>  
+</html>
+
+
+

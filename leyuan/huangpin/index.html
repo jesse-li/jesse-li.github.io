@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+    <title>皇品乐园</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/huangpin/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body class="has">
+	<div class="bg1">
+    	<img src="img/index/1.png">
+    </div>
+    <div class="bg2">
+    	<a href="download.html" target="_self">下载表情包</a>
+    	<img src="img/index/2.png">
+    </div>
+    <div class="list">
+    	<img src="img/index/6.png">
+        <section id="acList" class="ac-list swiper-container">
+        	<div class="my-wrapper swiper-wrapper">
+        	</div>
+        </section>
+    </div>        
+	<div class="hp-cj">
+        <a href="main.html" target="_self">
+        	<img src="img/index/7.png">
+        </a>
+    </div>
+    <div class="a-choose">
+    	<a href="youlechang.html" target="_self">游乐场<img src="img/index/8.png"></a>
+        <a href="http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzAxNTE1Mjc1Mg==&shelf_id=1&showwxpaytitle=1#wechat_redirect">微小店</a>
+    </div>
+    <div class="bt">
+    	<a href="consult.html" target="_self">乐园资讯<i></i></a>
+    	<img src="img/index/4.png">
+    </div>
+</body>
+	<script type="text/html" id="swiperDemo">
+        
+        	
+        		[:for(var i=0,j=data.length;i<j;i+=1){:]
+        			<p class="swiper-slide stop-swiping">恭喜 [:=data[i].nickName:] 获得[:=data[i].thingName:]</p>
+        		[:}:]
+        	
+        
+    </script> 
+<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/swiper.jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+			;(function(){
+				swiper.init();
+				checkNews();
+				//每隔一分钟去拿一次资讯
+				setTimeout(function(){
+					checkNews();
+				},60000)
+			})();
+</script>
+</html>
+
+
+

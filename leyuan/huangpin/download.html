@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+    <title>冬瓜仔第一季</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/huangpin/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body>
+<div class="top">
+	<a onclick="window.history.go(-1)" href="javascript:;" target="_self">
+    	返回
+    </a>
+    <h3>冬瓜仔第一季</h3>
+</div>
+<div class="download-pic">
+	<img src="img/index/download.jpg">
+</div>
+<div id="toast">长按图片保存</div>
+<div class="download-img">
+	<div class="list-1 clearfix">
+    	<div class="title fl">
+        	<span>冬瓜仔第一季</span>
+        </div>
+        <!--<a href="javascript:;" class="fr download-a">下载</a>-->
+    </div>
+    <p>没错，我就是集美貌与智慧于一身的冬瓜仔！快和我一起在太阳下欢乐地狂奔！</p>
+    <div class="lazyload-pic clearfix">
+       
+    </div>
+</div>
+<p class="p-title">Tip：保存表情包可以提高中大奖的概率哦！</p>
+<!--<div class="wxShadow"></div>
+<div class="wxTitle">
+	<img src="img/index/wx_error.png">
+</div>-->
+</body>
+<script id="downloadHtml" type="text/html">
+	[:for(var i=0,j=list;i<j;i+=1){:]
+		<div class="img-flex">
+       	 <img class="lazy" alt="" data-original="img/index/download/[:=i+1:].gif">
+       </div>
+	[:}:]
+</script>
+<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.lazyload.min.js"></script>
+<script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wechatHidden.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	var html = tppl($("#downloadHtml").html(),{list:15});
+	$(".lazyload-pic").append(html);
+	$("img.lazy").lazyload({
+    	effect : "fadeIn"
+	});
+	var t = true,ua = navigator.userAgent.toLocaleLowerCase();
+	$(".img-flex").find("img").on("click",function(){
+		if(t === true){
+			t = false;
+			$("#toast").fadeIn(300,function(){
+				setTimeout(function(){
+					$("#toast").fadeOut(300,function(){
+						t = true;
+					})
+				},1500)
+			})
+		}
+	});
+	
+</script>
+</html>
+
+
+

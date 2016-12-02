@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+    <title>游乐场</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/huangpin/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body class="ylc">
+<div class="top">
+	<a onclick="window.history.go(-1)" href="javascript:;" target="_self">
+    	返回
+    </a>
+    <h3>游乐场</h3>
+</div>
+<article>
+	<ul id="ylyList">
+                
+            </ul>
+</article>
+<div class="wxShadow dn"></div>
+<div class="wxTitle dn">
+	<img src="img/index/wx_error.png">
+</div>
+<script id="listDemo" type="text/html">
+	[:if(iphone === true){:]
+		[:for(var i=0,j=list.length;i<j;i+=1){:]
+			[:if(list[i].type == "h5"){:]
+				<li class="clearfix">
+                <div>
+                	<img src="[:=list[i].img:]" alt="" />
+                	</div>
+                    <p>
+                        <span>[:=list[i].txt:]</span>
+                        <span class="font">[:=list[i].con:]</span>
+                    </p>
+                    <a class="begin" href="[:=list[i].href:]" target="_blank">开始</a>
+                    </li>
+			[:}:]
+			
+          [:}:]
+		[:}else{:]
+			[:for(var i=0,j=list.length;i<j;i+=1){:]
+	       		<li class="clearfix">
+	                <div>
+	                	<img src="[:=list[i].img:]" alt="" />
+	                	</div>
+	                    <p>
+	                        <span>[:=list[i].txt:]</span>
+	                        <span class="font">[:=list[i].con:]</span>
+	                    </p>
+	                   [:if(list[i].type == "h5"){:]
+	                   <a class="begin" href="[:=list[i].href:]" target="_blank">开始</a>
+	                   [:}else{:]
+	                   <a class="download" href="[:=list[i].href:]" target="_blank">下载</a>
+	                   [:}:]
+	                   		
+	                    
+	                    
+	                </li>
+	       	[:}:]
+	       	
+		[:}:]
+       	
+       </script>
+</body>
+<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+<script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wechatHidden.js" type="text/javascript" charset="utf-8"></script>
+ <script type="text/javascript">
+        	var data={
+        		iphone:navigator.userAgent.toLocaleLowerCase().indexOf("iphone")!==-1?true:false,
+        		list:[
+        		{img:"img/ylc/1.png",type:"apk",txt:"阴阳师",con:"网易和风匠心巨制，开启唯美奇幻之旅",href:"http://d.cn/4"},
+        		{img:"img/ylc/2.png",type:"apk",txt:"放开那三国2",con:"精美搞笑呆萌三国卡牌手游，冠绝三国，不负王名！",href:"http://d.cn/2"},
+        		{img:"img/ylc/3.png",type:"h5",txt:"联盟与部落",con:"召唤艾泽拉斯的英雄与你并肩作战",href:"http://h5sdk.d.cn/300003/app/50001"},
+        		{img:"img/ylc/4.png",type:"h5",txt:"传奇世界之仗剑天涯",con:"盛大正版授权，重拾经典传奇",href:"http://h5sdk.d.cn/300003/app/50020"},
+        		{img:"img/ylc/5.png",type:"apk",txt:"率土之滨",con:"军政战略大手游《率土之滨》邀吾王开国吞天下！",href:"http://d.cn/1"},
+        		{img:"img/ylc/6.png",type:"h5",txt:"小小地下城",con:"小镇地下城中，到底有些什么秘密？",href:"http://h5sdk.d.cn/300003/app/50021"},
+        		{img:"img/ylc/7.png",type:"apk",txt:"巨龙之战",con:"新建城池招募四族大军，体验年度最佳魔幻策略战争游戏。",href:"http://d.cn/3"},
+        		{img:"img/ylc/8.png",type:"apk",txt:"谁是卧底",con:"真正多人参与，比拼智力与运气，史上最萌的杀人游戏。",href:"http://d.cn/5"},
+        		{img:"img/ylc/9.png",type:"h5",txt:"秦时明月",con:"缘起秦时，执手明月",href:"http://h5sdk.d.cn/300003/app/50025"},
+        		{img:"img/ylc/10.png",type:"h5",txt:"部落大亨",con:"自己的部落由我们自己做主",href:"http://h5sdk.d.cn/300003/app/50014"},
+        		{img:"img/ylc/11.png",type:"apk",txt:"劲舞团",con:"原版移植加入丰富社交系统，劲舞的世界永远不缺少伙伴！",href:"http://d.cn/6"},
+        		{img:"img/ylc/12.png",type:"h5",txt:"热血校园",con:"激萌高校等你约战，给你不一样的高校生活！",href:"http://h5sdk.d.cn/300003/app/50005"},
+        		{img:"img/ylc/13.png",type:"h5",txt:"少女H计划2",con:"我的完美女友由我自己创造",href:"http://h5sdk.d.cn/300003/app/50055"},
+        		{img:"img/ylc/14.png",type:"h5",txt:"大圣西游",con:"首款H5卡牌类RPG养成游戏",href:"http://h5sdk.d.cn/300003/app/50022"}
+        		]
+        		
+        	};
+		
+        </script>
+
+</html>
+
+
+

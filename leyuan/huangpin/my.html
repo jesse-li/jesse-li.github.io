@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+    <title>我的奖品</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/huangpin/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body class="has2">
+    <div class="top">
+        <a onclick="window.history.go(-1)" href="javascript:;" target="_self">
+            返回
+        </a>
+        <h3>我的奖品</h3>
+    </div>
+    <ul class="jp-list">
+		
+    </ul>
+    <div class="bt">
+    	<img src="img/index/4.png">
+    </div>
+    <section id="phoneCheck" class="dn">
+		<img src="img/index/download.jpg" class="blur"> 
+		<div class="shadow">
+			<div class="return-a">
+		    	<a href="javascript:;">
+		    		返回
+		    	</a>
+		    </div>
+			<div class="concent-text">
+		        <div class="text-tel">手机验证</div>
+		        <div class="input hide-after">
+		            <input type="number" placeholder="请输入您的手机号码" maxlength="11">
+		        </div>
+		        <p>滑动完成验证</p>
+		        <div id="dragverify"></div>
+		        
+		    </div>
+		</div>
+	</section>
+    <script id="jpDemo" type="text/html">
+    	[:for(var i=0,j=data.length;i<j;i+=1){:]
+    		 <li class="clearfix">
+	        	<div class="jp-info">
+	            	<p>[:=new Date(data[i].winner.winTime).getFullYear():]-[:=new Date(data[i].winner.winTime).getMonth()+1:]-[:=new Date(data[i].winner.winTime).getDate():]</p>
+	                <div>
+	                	<img src="[:=data[i].merchandise.image.replace(/,/g,''):]">
+	                    <span><i>奖</i>[:=data[i].merchandise.name:]</span>
+	                </div>
+	            </div>
+	            [:if(data[i].merchandise.category=='VOUCHER'||data[i].merchandise.category=='GIFT_SET'||data[i].merchandise.category=='REAL'){:]
+		             <a href="detailPrize.html?id=[:=data[i].winner.id:]" target="_self">
+		            	查看<i class="bg-i"></i>
+		            </a>
+	            [:}else{:]
+		            <a href="javascript:;">
+		            	查看<i class="bg-i"></i>
+		            </a>
+	            [:}:]
+	            
+	        </li>
+    	[:}:]
+    </script>
+    <script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="http://static.geetest.com/static/tools/gt.js"></script>-->
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/wechatHidden.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		;(function(){
+				checkFlow.checkUser(function(){
+					/*$("#phoneCheck").addClass("dn");
+            		$(".banner").addClass("dn");*/
+            		listLoad({
+            			url:"huangpin/listPrize.html",
+            			callback:function(res){
+            				var tppHtml = tppl($("#jpDemo").html(),res);
+							$(".jp-list").append(tppHtml);
+						}
+            		});
+				},function(){
+					listLoad({
+            			url:"huangpin/listPrize.html",
+            			callback:function(res){
+            				var tppHtml = tppl($("#jpDemo").html(),res);
+							$(".jp-list").append(tppHtml);
+						}
+            		});
+				});
+			})();
+	</script>
+</body>
+
+
+
+</html>
+
+
+

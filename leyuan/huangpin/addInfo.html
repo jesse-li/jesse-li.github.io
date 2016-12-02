@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+    <title>兑奖确认</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/huangpin/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body>
+	<input type="hidden" id="goodsId" value="" />
+<div class="top">
+	<a onclick="window.history.go(-1)" href="javascript:;" target="_self">
+    	返回
+    </a>
+    <h3>兑奖确认</h3>
+</div>
+<section class="goods-info">
+	<h3>收货信息</h3>
+	<form id="userInfo" method="post">
+		<div class="user-info">
+			<label>收货人&nbsp;&nbsp;&nbsp;&nbsp;<input data-error="收货人不能为空" name="receiverName" type="text"/></label>
+			<label>联系电话<span>18200389641</span></label>
+			<label>验证码&nbsp;&nbsp;&nbsp;&nbsp;<input data-error="验证码不能为空" name="code" type="text"/><a class="start" id="sendCode" href="javascript:void(0)" target="_self">发送验证码</a></label>
+			<label>邮政编码<input data-error="邮政编码不能为空" name="zipCode" type="numbe"/></label>
+			<label>收货地址</label>
+			<textarea data-error="收货地址不能为空" name="address" rows="" cols=""></textarea>
+			<p class="tip-error dn"></p>
+		</div>
+		<div class="line-bg">
+			
+		</div>
+		<div class="things-info">
+			<img src="img/index/game4.png"/>
+			<span>iphone7 Plus玫瑰金</span>
+			<div>
+				<h4>兑奖说明</h4>
+				<p>恭喜您中奖啦！请确认收货人姓名、收货地址、联系方式、邮政编码。订单确认后，工作人员将于15个工作日内完成物流发货；玩家可在中奖纪录里点击对应的中奖订单查看中奖详情和物流信息。</p>
+			</div>
+		</div>
+		<input id="postBtn" type="submit" value="提交兑奖"/>
+	</form>
+	
+</section>
+<div id="toast"></div>
+<script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wechatHidden.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var baseUrl = "http://leyuan.d.cn/",times = 120,timer=null,aInput = $("input[type!=submit][type!=hidden],textarea");
+	function valCheck(){
+		var i=0,j=aInput.length,t=false;
+		for(i,j;i<j;i+=1){//粗略的检测一下每一项的值
+			
+			if(aInput.eq(i).val()!=""){
+				t = true;
+				$(".tip-error").addClass("dn");
+			}else{
+				t = false;
+				$(".tip-error").text(aInput.eq(i).data("error")).removeClass("dn");
+				break;
+			}
+		}
+		return t;
+	}
+	$("#sendCode").on("click",function(){//toast切换时间 延迟时间
+		var $this = $(this),time1 = 300,time2 = 1500;
+		
+		if(!$this.hasClass("wait")){
+			times = 120;
+			$.ajax({
+				type:"post",
+				url:baseUrl+"api/sendCode.html",
+				dataType:"json",
+				async:true
+			}).done(function(res){
+				if(res&&res.code === 200){
+					$this.removeClass("start").addClass("wait").text(times+"s");
+					sendCode();
+				}else{
+					$("#toast").text(res.message).fadeIn(time1,function(){
+						setTimeout(function(){
+							$("#toast").fadeOut(time1)
+						},time2)
+					})
+				}
+				
+			});
+		}
+	});
+	function sendCode(){
+		
+		if(times === 0){
+			clearTimeout(timer);
+			$("#sendCode").removeClass("wait").text("重新发送验证码");
+		}else{
+			timer=setTimeout(function(){
+				times-=1;
+				$("#sendCode").text(times+"s");
+				sendCode();
+			},1000)
+		}
+		
+		
+	}
+	$("#userInfo").on("submit",function(){
+		var $this = $(this),time1 = 300,time2 = 1500;
+		if(valCheck() === true){
+			var dataStr = $this.serializeArray(),data={},i=0,j=dataStr.length;
+			for(i,j;i<j;i+=1){
+				data[dataStr[i].name] = dataStr[i].value;
+			}
+			data.id = $("#goodsId").val();
+			$.ajax({
+				type:"post",
+				url:baseUrl+"huangpin/perfectUserAddress.html",
+				dataType:"json",
+				async:true,
+				data:data
+			}).done(function(res){
+				if(res.code === 200){
+					$("#toast").text(res.message).fadeIn(time1,function(){
+						setTimeout(function(){
+							location.href = "main.html";
+							$("#toast").fadeOut(time1);
+						},time2)
+					})
+					
+				}else{
+					$("#toast").text(res.message).fadeIn(time1,function(){
+						setTimeout(function(){
+							$("#toast").fadeOut(time1)
+						},time2)
+					})
+				}
+			});
+		}
+		return false;
+	});
+</script>
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+    <title>皇品乐园</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://leyuan.d.cn/huangpin/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/reste.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body class="has2">
+	<div class="rotate">
+    	<!--<div class="top-rotate clearfix">
+        	<a href="javascript:;" class="search-a">
+   				中奖查询
+  	 	   </a>
+        </div>-->
+       <div class="list rotate-list">
+            <section id="acList" class="ac-list swiper-container">
+                        <div class="my-wrapper swiper-wrapper">
+                            
+                        </div>
+            </section>
+    	</div>
+    	<p class="index-tip">您还有<em>0</em>次抽奖机会<!--<i class="bg"></i>--></p>
+        <section class="cj-box">
+        	<img src="img/index/6.png" class="bird">
+            <img src="img/index/text.png" class="bq">
+            <img src="img/index/8.png" class="fish">
+        	<ul class="clearix">
+            	<li data-id="1">
+                	<div>
+                    	<p>游戏礼包</p>
+                        <img src="img/index/text/cj1.png">
+                    </div>
+                </li>
+                <li data-id="2">
+                	<div>
+                    	<p>iPhone 7</p>
+                        <img src="img/index/text/cj2.png">
+                    </div>
+                </li>
+                <li data-id="3">
+                	<div>
+                    	<p>冬瓜茶</p>
+                        <img src="img/index/text/cj3.png">
+                    </div>
+                </li>
+                <li data-id="8">
+                	<div>
+                    	<p>微信红包</p>
+                        <img src="img/index/text/cj8.png">
+                    </div>
+                </li>
+                <li class="cj-btn">
+                </li>
+                <li data-id="4">
+                	<div>
+                    	<p>皇品牛肉面</p>
+                        <img src="img/index/text/cj4.png">
+                    </div>
+                </li>
+                <li data-id="7">
+                	<div>
+                    	<p>绿力冬瓜仔</p>
+                        <img src="img/index/text/cj7.png">
+                    </div>
+                </li>
+                <li data-id="6">
+                	<div>
+                    	<p>掌柜红包</p>
+                        <img src="img/index/text/cj6.png">
+                    </div>
+                </li>
+                <li data-id="5">
+                	<div>
+                    	<p>游戏代金券</p>
+                        <img src="img/index/text/cj5.png">
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+    <div class="bt">
+    	<img src="img/index/rotate-bottom.png">
+        <div class="btns clearfix">
+        	<a href="javascript:;" class="fl">
+            	活动说明
+            </a>
+            <a href="my.html" target="_self" class="fr">
+            	我的奖品
+            </a>
+        </div>
+    </div>
+    <section id="phoneCheck" class="dn">
+		<img src="img/index/download.jpg" class="blur"> 
+		<div class="shadow">
+			<div class="return-a">
+		    	<a href="javascript:;">
+		    		返回
+		    	</a>
+		    </div>
+			<div class="concent-text">
+		        <div class="text-tel">手机验证</div>
+		        <div class="input hide-after">
+		            <input type="number" placeholder="请输入您的手机号码" maxlength="11">
+		        </div>
+		        <p>滑动完成验证</p>
+		        <div id="dragverify"></div>
+		        
+		    </div>
+		</div>
+	</section>
+<section id="cjTip" class="dn">
+			<a class="closeBtn bg" href="javascript:void(0)" target="_self"></a>
+			<h3>活动说明</h3>
+			<p>1.活动时间：2016/11/28—2016/12/31</p>
+			<p>2.活动参与方式：关注绿力公众号即可参与</p>
+			<p>3.活动期间，每位用户每日进入皇品乐园即可获得3次抽奖机会</p>
+			<p>4.活动奖品包括：iphone 7、5.88-888元的钱大掌柜红包、310冬瓜茶（六罐装）、绿力冬瓜仔、绿力金皇品金钱腱牛肉面（单碗）、5元微信红包、游戏礼包、游戏代金券</p>
+			<p>5.严禁使用作弊手段刷取奖品，一经发现，立即封号并严肃处理</p>
+			<p>6.如您有任何问题，请拨打客服热线：400-004-8001</p>
+			<p></p>
+		</section>
+<section id="timesError" class="times-error dn">
+			<div>
+				<img data-url="img/times.png" src="img/times.png"/>
+				<p>对不起</p>
+				<p>抽奖次数用完啦</p>
+				<p>下次再来哦</p>
+			</div>
+		</section>
+<div class="banner dn"></div>
+    <script type="text/html" id="swiperDemo">
+        [:for(var i=0,j=data.length;i<j;i+=1){:]
+        	<p class="swiper-slide stop-swiping">恭喜 [:=data[i].nickName:] 获得[:=data[i].thingName:]</p>
+        [:}:]
+    </script>
+    <script id="resultTem" type="text/html">
+			<section id="cjResult">
+				<a class="closeBtn bg" href="javascript:void(0)" target="_self"></a>
+				<p class="result-tit">恭喜您，获得[:=merchandise.name:]</p>
+				<img src="[:=merchandise.image.replace(/,/g,''):]"/>
+				<a class="get-btn" href="[:=url:]" target="_self">点击领取</a>
+			</section>
+		</script>
+    <script src="js/jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/tppl.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/swiper.jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		;(function(){
+				var $cjBtn = $(".cj-btn");
+            	swiper.init();
+            	checkFlow.checkUser(function(res){
+            		$("#phoneCheck").addClass("dn");
+            		$(".banner").addClass("dn");
+            	});
+            	$cjBtn.on("click",function(){
+            		playF.init({
+            			aLi:$("li[data-id]"),
+            			timesError:$("#timesError"),
+            			tipHtml:$("#resultTem").html(),
+            			banner:$(".banner"),
+            			CurrClassName:"curr"
+            		});
+            	});
+            	var $cjAndbanner = $("#cjTip,.banner");
+             	$(".btns").find("a").first().on("click",function(){
+             		if(playF.t === true){
+             			$cjAndbanner.removeClass("dn");
+             		}
+             		
+             	});
+			})();
+	</script>
+</body>
+
+
+
+</html>
+
+
+
