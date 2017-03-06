@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-itunes-app" content="app-id=432274380">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="renderer" content="webkit" />
+
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<title>ofo</title>
+
+	</head>
+
+	<body class="zhi ">
+		<div class="index-main">
+			<div class="index-main-body">
+				<div class="index-header">
+
+					<h1 style="font-size: 40px;color: #333;" class="logo hide-text">ofo</h1>
+
+					<h2 class="subtitle">获取ofo密码</h2>
+				</div>
+				<div class="desk-front sign-flow clearfix sign-flow-simple">
+					<div class="index-tab-navs">
+						<div class="navs-slider" data-active-index="1">
+							<a href="#signin" class="active">登录</a>
+						</div>
+					</div>
+					<div class="view view-signin" data-za-module="SignInForm" style="display: block;">
+						<form id="login" method="get" novalidate="novalidate">
+							<input type="hidden" name="_xsrf" value="f81ee3b47e020430b1a7e08aecffa82f">
+							<div class="group-inputs">
+
+								<div class="account input-wrapper">
+
+									<input id="nick" type="text" name="account" aria-label="" placeholder="输入昵称如（小罗子）" required="">
+								</div>
+								<div class="verification input-wrapper">
+									<input id="pw" type="password" name="password" aria-label="密码" placeholder="密码" required=""><button type="button" class="send-code-button">获取验证码</button>
+								</div>
+
+							</div>
+							<div class="button-wrapper command">
+								<button class="sign-button submit" type="submit">登录</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+			<div class="input-num hidden">
+				<form id="getPassword">
+					<input type="number" id="inputBox" value="" placeholder="快输入车牌号码！！" />
+					
+					<input class="sign-button" id="submitBtn" type="submit" value="点我点我"/>
+				</form>
+			</div>
+		</div>
+		<p id="password"></p>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="main.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>
