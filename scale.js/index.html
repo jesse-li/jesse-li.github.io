@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,target-densitydpi=device-dpi" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="renderer" content="webkit" />
+		<meta name="wap-font-scale"content="no" />
+		<meta name="Keywords" content=""/>
+		<meta name="Description" content=""/>
+		<title></title>
+		<script type="text/javascript">
+			/*这种设计模式下，移动端需要使用meta来缩放，web端需要使用zoom来缩放
+			 	 页面所有元素都必须按照设计图的尺寸来固定
+			  web端的缩放比例，预计的显示宽度/设计图的宽度
+			  android 4.4以下对viewport缩放支持不太好，使用zoom配合target-densitydpi=device-dpi来缩放
+			  	魅族手机使用viewport缩放有点问题,需要使用上面的方法处理
+			  	
+			  	手机旋转时，android系浏览器和safari获取视窗的不同
+			  	
+			  	假如android和safari的size都是320*640
+			  	
+			  	在竖屏模式下   window.screen.width  window.screen.height
+			  	android  320                  640
+			  	safari   320                  640
+			  	
+			  	在横屏模式下   window.screen.width  window.screen.height
+			  	android  640                  320
+			  	safari   320                  640
+			  	
+			 	上面的问题，等有空再修复，这个版本暂时不用(已修复)
+			  	
+			  	在orientationchange的回调里增加一个定时器，解决某些低端安卓机获取可视区信息延迟的问题
+			 **/
+			
+			scale(1080,540);
+			function scale(deWidth,webWidth){
+				var changeTimer = null,sWidth = window.screen.width;
+				if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&typeof window.orientation!=="undefined"&&window.orientation !== 0){
+					sWidth = window.screen.height;
+				}
+				if(navigator.userAgent.indexOf("Mobile")!==-1){
+					/*alert(window.screen.width+" "+window.screen.height)*/
+				window.onorientationchange = function(){
+					/*alert(window.orientation)*/
+					/*alert("ok")*/
+					/*alert(window.screen.width+" "+window.screen.height)*/
+					
+					changeTimer&&clearTimeout(changeTimer);
+					changeTimer = setTimeout(function(){
+						if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&typeof window.orientation!=="undefined"&&window.orientation !== 0){
+					sWidth = window.screen.height;
+				}else{
+					sWidth = window.screen.width
+				}
+						if(sWidth/deWidth<=1){
+							if (navigator.userAgent.match(/Android (\d+\.\d+)/)){
+								if(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4||navigator.userAgent.indexOf("MZ-")!==-1){
+									
+									document.documentElement.style.zoom = sWidth/deWidth;
+									return false;
+								}
+							}
+							var meta = document.createElement("meta");
+							meta.setAttribute("name","viewport");
+							meta.setAttribute("content","width=device-width,initial-scale="+(sWidth/deWidth).toFixed(2)+",user-scalable=no,target-densitydpi=device-dpi");
+							
+							document.querySelector("[name=viewport]").remove();
+							document.head.appendChild(meta);
+								/*alert(document.querySelector("[name=viewport]").content)*/
+							
+						}
+					},500)
+					
+				}
+				if(sWidth/deWidth<=1){
+					if (navigator.userAgent.match(/Android (\d+\.\d+)/)){
+						
+						if(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4||navigator.userAgent.indexOf("MZ-")!==-1){
+							document.documentElement.style.zoom = sWidth/deWidth;
+							return false;
+						}
+					}
+					
+					var meta = document.createElement("meta");
+							meta.setAttribute("name","viewport");
+							meta.setAttribute("content","width=device-width,initial-scale="+(sWidth/deWidth).toFixed(2)+",user-scalable=no,target-densitydpi=device-dpi");
+							document.querySelector("[name=viewport]").remove();
+							document.head.appendChild(meta);
+						/*alert(document.querySelector("[name=viewport]").content)*/
+					
+					
+				}
+			}else{
+				document.documentElement.style.zoom = webWidth/deWidth;
+			}
+			}
+			
+		</script>
+	
+    <link rel="stylesheet" type="text/css" href="pkg/index_aio_28cfc73.css" />
+</head>
+	<body>
+		<section id="captcha" class="dn"></section>
+		<p class="tips">xxxxxxxxx</p>
+		<div class="over dn"></div>
+		<section class="bind-phone dn">
+			<p>您尚未绑定手机，请先完成绑定，然后从“系统消息”回到活动页面即可领取。</p>
+			<div>
+				<a id="cancelBtn" href="javascript:void(0)" title="" target="_self">取消</a>
+				<a href="javascript:void(0)" title="" target="_self">立即绑定</a>
+			</div>
+		</section>
+		<section class="rule-box dn">
+			<h4>活动规则<i></i></h4>
+			<section>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				<p>1、嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+				
+			</section>
+			<span></span>
+		</section>
+		<img class="bg" src="img/bg.jpg"/>
+		<section class="main">
+			<a class="rule" href="javascript:void(0)" title="" target="_self">查看活动规则</a>
+			<img src="img/title-test.png"/>
+			<ul class="list clearfix"></ul>
+			<a href="javascript:void(0)" target="_self" class="get-js getnow">立即领取</a>
+			<a href="javascript:void(0)" target="_self" class="more">点击查看更多福利</a>
+		</section>
+		
+		<script id="list" type="html/javascript">
+			[:for(var i = 0,j = model.vouchers.length;i<j;i+=1){:]
+				<li>
+					<h4>[:=model.vouchers[i].name:]</h4>
+					<p>[:=model.vouchers[i].desc:]</p>
+					[:if(model.vouchers[i].status === 0){:]
+						<a data-id="[:=model.vouchers[i].baseId:]" class="get-js" href="javascript:void(0)" title="" target="_self">点击领取</a>
+					[:}:]
+					[:if(model.vouchers[i].status === 1){:]
+						<a class="geted" href="javascript:void(0)" title="" target="_self">已领取</a>
+					[:}:]
+				</li>
+			[:}:]
+			
+		</script>
+	
+<script type="text/javascript" charset="utf-8" src="pkg/index_aio_c7ebb06.js"></script>
+</body>
+</html>

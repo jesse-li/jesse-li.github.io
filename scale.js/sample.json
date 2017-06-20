@@ -1,0 +1,45 @@
+{
+    "code": 2904,
+    "desc":"描述",
+    "model": {
+      "vouchers":[
+		      {
+		        "baseId":"1",
+		        "name":"9元券",
+		        "desc":"满xx减xx" ,
+		        "status":1
+		      },
+		      {
+		        "baseId":"1",
+		        "name":"9元券",
+		        "desc":"满xx减xx" ,
+		        "status":0
+		      },
+		      {
+		        "baseId":"1",
+		        "name":"9元券",
+		        "desc":"满xx减xx" ,
+		        "status":0
+		      },
+		      {
+		        "baseId":"1",
+		        "name":"9元券",
+		        "desc":"满xx减xx" ,
+		        "status":0
+		      },
+		      {
+		        "baseId":"1",
+		        "name":"9元券",
+		        "desc":"满xx减xx" ,
+		        "status":0
+		      },
+		      {
+		        "baseId":"1",
+		        "name":"9元券",
+		        "desc":"满xx减xx" ,
+		        "status":0
+		      }
+      	] 
+      
+    }
+  }
