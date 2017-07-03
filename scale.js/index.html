@@ -55,75 +55,64 @@
 			//alert(navigator.userAgent)
 			
 			/*alert(window.orientation)*/
-			scale(1080,540);
-			
-function scale(deWidth,webWidth){
-				if(navigator.userAgent.match(/Android (\d+\.\d+)/)&&(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4)){
+			var Scale = {
+	init:function(deWidth,webWidth){
+		var that = this,changeTimer = null;
+		that.sWidth = document.documentElement.clientWidth;
+		that.deWidth = deWidth;
+		that.webWidth = webWidth;
+		if(navigator.userAgent.match(/Android (\d+\.\d+)/)&&(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4)){
 						var meta = document.createElement("meta");
-								meta.setAttribute("name","viewport");
-								meta.setAttribute("content","width=device-width,initial-scale="+(sWidth/deWidth)+",user-scalable=no,target-densitydpi=device-dpi");
-								
-								document.querySelector("[name=viewport]").remove();
-								document.head.appendChild(meta);
-					}
-				var changeTimer = null;
-				var initWidth = document.documentElement.clientWidth;
-				var initHeight = document.documentElement.clientHeight;
-				var sWidth = initWidth;
-				if(navigator.userAgent.indexOf("Mobile")!==-1){
-					
-					window.onorientationchange = function(){
-						resetScale();
-						changeTimer&&clearTimeout(changeTimer);
-						changeTimer = setTimeout(function(){
-							sWidth = document.documentElement.clientWidth;
-							setScale(sWidth,deWidth);
-						},500)
-					}
-					setScale(sWidth,deWidth);
-				}else{
-					if(navigator.userAgent.indexOf("Firefox")!==-1){
-						document.documentElement.style.transform = "scale("+webWidth/deWidth+")";
-					}else{
-						document.documentElement.style.zoom = webWidth/deWidth;
-					}
-				}
+							meta.setAttribute("name","viewport");
+							meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no,target-densitydpi=device-dpi");
+							
+							document.querySelector("[name=viewport]").remove();
+							document.head.appendChild(meta);
+		}
+		if(navigator.userAgent.indexOf("Mobile")!==-1){
+			window.onorientationchange = function(){
+				that.resetScale();
+				changeTimer&&clearTimeout(changeTimer);
+				changeTimer = setTimeout(function(){
+					that.sWidth = document.documentElement.clientWidth;
+					taht.setScale();
+				},500)
 			}
-			
-			
-			function setScale(sWidth,deWidth){
-				
-				if(sWidth/deWidth<=1){
-					
-					if (navigator.userAgent.match(/Android (\d+\.\d+)/)){
-								
-									document.documentElement.style.zoom = sWidth/deWidth;
-							}else{
-								var meta = document.createElement("meta");
-								meta.setAttribute("name","viewport");
-								meta.setAttribute("content","width=device-width,initial-scale="+(sWidth/deWidth)+",user-scalable=no");
-								
-								document.querySelector("[name=viewport]").remove();
-								document.head.appendChild(meta);
-								
-								
-							}
-					
-					
-				}
-				
+			that.setScale();
+		}else{
+			if(navigator.userAgent.indexOf("Firefox")!==-1){
+				document.documentElement.style.transform = "scale("+that.webWidth/that.deWidth+")";
+			}else{
+				document.documentElement.style.zoom = that.webWidth/that.deWidth;
 			}
-			
-			function resetScale(){
-				document.documentElement.style.zoom = 1;
+		}
+	},
+	setScale:function(){
+		var that = this;
+		if(that.sWidth/that.deWidth<=1){
+			if(navigator.userAgent.match(/Android (\d+\.\d+)/)){
+				document.documentElement.style.zoom = that.sWidth/that.deWidth;
+			}else{
 				var meta = document.createElement("meta");
 				meta.setAttribute("name","viewport");
-				meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no");
-				
+				meta.setAttribute("content","width=device-width,initial-scale="+(that.sWidth/that.deWidth)+",user-scalable=no");
 				document.querySelector("[name=viewport]").remove();
 				document.head.appendChild(meta);
-							
 			}
+			
+			
+		}
+	},
+	resetScale:function(){
+		document.documentElement.style.zoom = 1;
+		var meta = document.createElement("meta");
+		meta.setAttribute("name","viewport");
+		meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no");
+		document.querySelector("[name=viewport]").remove();
+		document.head.appendChild(meta);
+					
+	}
+}
 			
 		</script>
 	
