@@ -31,69 +31,98 @@
 			 	上面的问题，等有空再修复，这个版本暂时不用(已修复)
 			  	
 			  	在orientationchange的回调里增加一个定时器，解决某些低端安卓机获取可视区信息延迟的问题
+			  	
+			  	firefox不支持zoom，使用scale兼容
+			  	解决在某些内嵌页下，screen输出的是设备的分辨率，而不是可视区的宽度
+			  	window.screen.width ===document.documentElement.clientWidth?window.screen.width:window.screen.width/window.devicePixelRatio;
+			  	
+			  	大更新，由于window.screen在某些内嵌页下，返回的是设备的物理分辨率，并不是我们想要的设备可视区的信息，这样导致缩放比例出错，统一使用documen.documentElement.clientWidth和documen.documentElement.clientHeight。
+			  	在resize的时候还原zoom或者meta 重新去获取正确的视窗信息（因为缩放的原因，拿到的size是被放大了，之所以不记录缩放系数，因为有可能导致精度问题）
+			  	
+			  	
 			 **/
 			
+			/*2017-07-03 upDate
+			 缩放规则更改
+			 在安卓设备(4.4以上)上统一使用zoom来缩放(meta,target-densitydpi=device-dpi在某些内核下会自带缩放,即使没有设置initial-scale)
+			 
+			 安卓设备(4.4以下)使用zoom + target-densitydpi=device-dpi
+			 
+			 非安卓的设置使用<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />来缩放
+			 
+			 不使用target-densitydpi=device-dpi可能会引起一些问题,待观察*/
+			
+			//alert(navigator.userAgent)
+			
+			/*alert(window.orientation)*/
 			scale(1080,540);
-			function scale(deWidth,webWidth){
-				var changeTimer = null,sWidth = window.screen.width;
-				if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&typeof window.orientation!=="undefined"&&window.orientation !== 0){
-					sWidth = window.screen.height;
-				}
-				if(navigator.userAgent.indexOf("Mobile")!==-1){
-					/*alert(window.screen.width+" "+window.screen.height)*/
-				window.onorientationchange = function(){
-					/*alert(window.orientation)*/
-					/*alert("ok")*/
-					/*alert(window.screen.width+" "+window.screen.height)*/
-					
-					changeTimer&&clearTimeout(changeTimer);
-					changeTimer = setTimeout(function(){
-						if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&typeof window.orientation!=="undefined"&&window.orientation !== 0){
-					sWidth = window.screen.height;
-				}else{
-					sWidth = window.screen.width
-				}
-						if(sWidth/deWidth<=1){
-							if (navigator.userAgent.match(/Android (\d+\.\d+)/)){
-								if(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4||navigator.userAgent.indexOf("MZ-")!==-1){
-									
-									document.documentElement.style.zoom = sWidth/deWidth;
-									return false;
-								}
-							}
-							var meta = document.createElement("meta");
-							meta.setAttribute("name","viewport");
-							meta.setAttribute("content","width=device-width,initial-scale="+(sWidth/deWidth).toFixed(2)+",user-scalable=no,target-densitydpi=device-dpi");
-							
-							document.querySelector("[name=viewport]").remove();
-							document.head.appendChild(meta);
-								/*alert(document.querySelector("[name=viewport]").content)*/
-							
-						}
-					},500)
-					
-				}
-				if(sWidth/deWidth<=1){
-					if (navigator.userAgent.match(/Android (\d+\.\d+)/)){
-						
-						if(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4||navigator.userAgent.indexOf("MZ-")!==-1){
-							document.documentElement.style.zoom = sWidth/deWidth;
-							return false;
-						}
+			
+function scale(deWidth,webWidth){
+				if(navigator.userAgent.match(/Android (\d+\.\d+)/)&&(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4)){
+						var meta = document.createElement("meta");
+								meta.setAttribute("name","viewport");
+								meta.setAttribute("content","width=device-width,initial-scale="+(sWidth/deWidth)+",user-scalable=no,target-densitydpi=device-dpi");
+								
+								document.querySelector("[name=viewport]").remove();
+								document.head.appendChild(meta);
 					}
+				var changeTimer = null;
+				var initWidth = document.documentElement.clientWidth;
+				var initHeight = document.documentElement.clientHeight;
+				var sWidth = initWidth;
+				if(navigator.userAgent.indexOf("Mobile")!==-1){
 					
-					var meta = document.createElement("meta");
-							meta.setAttribute("name","viewport");
-							meta.setAttribute("content","width=device-width,initial-scale="+(sWidth/deWidth).toFixed(2)+",user-scalable=no,target-densitydpi=device-dpi");
-							document.querySelector("[name=viewport]").remove();
-							document.head.appendChild(meta);
-						/*alert(document.querySelector("[name=viewport]").content)*/
+					window.onorientationchange = function(){
+						resetScale();
+						changeTimer&&clearTimeout(changeTimer);
+						changeTimer = setTimeout(function(){
+							sWidth = document.documentElement.clientWidth;
+							setScale(sWidth,deWidth);
+						},500)
+					}
+					setScale(sWidth,deWidth);
+				}else{
+					if(navigator.userAgent.indexOf("Firefox")!==-1){
+						document.documentElement.style.transform = "scale("+webWidth/deWidth+")";
+					}else{
+						document.documentElement.style.zoom = webWidth/deWidth;
+					}
+				}
+			}
+			
+			
+			function setScale(sWidth,deWidth){
+				
+				if(sWidth/deWidth<=1){
+					
+					if (navigator.userAgent.match(/Android (\d+\.\d+)/)){
+								
+									document.documentElement.style.zoom = sWidth/deWidth;
+							}else{
+								var meta = document.createElement("meta");
+								meta.setAttribute("name","viewport");
+								meta.setAttribute("content","width=device-width,initial-scale="+(sWidth/deWidth)+",user-scalable=no");
+								
+								document.querySelector("[name=viewport]").remove();
+								document.head.appendChild(meta);
+								
+								
+							}
 					
 					
 				}
-			}else{
-				document.documentElement.style.zoom = webWidth/deWidth;
+				
 			}
+			
+			function resetScale(){
+				document.documentElement.style.zoom = 1;
+				var meta = document.createElement("meta");
+				meta.setAttribute("name","viewport");
+				meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no");
+				
+				document.querySelector("[name=viewport]").remove();
+				document.head.appendChild(meta);
+							
 			}
 			
 		</script>
