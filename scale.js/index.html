@@ -55,64 +55,76 @@
 			//alert(navigator.userAgent)
 			
 			/*alert(window.orientation)*/
-			var Scale = {
-	init:function(deWidth,webWidth){
-		var that = this,changeTimer = null;
-		that.sWidth = document.documentElement.clientWidth;
-		that.deWidth = deWidth;
-		that.webWidth = webWidth;
-		if(navigator.userAgent.match(/Android (\d+\.\d+)/)&&(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4)){
-						var meta = document.createElement("meta");
-							meta.setAttribute("name","viewport");
-							meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no,target-densitydpi=device-dpi");
+var Scale = {
+					init:function(deWidth,webWidth){
+						var that = this,changeTimer = null,initOrientation = window.orientation;
+						that.sWidth = document.documentElement.clientWidth;
+						that.deWidth = deWidth;
+						that.webWidth = webWidth;
+						if(navigator.userAgent.match(/Android (\d+\.\d+)/)&&(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4)){
+										var meta = document.createElement("meta");
+											meta.setAttribute("name","viewport");
+											meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no,target-densitydpi=device-dpi");
+											
+											document.querySelector("[name=viewport]").remove();
+											document.head.appendChild(meta);
+						}
+						if(navigator.userAgent.indexOf("Mobile")!==-1){
+							window.onorientationchange = function(){
+								that.resetScale();
+								changeTimer&&clearTimeout(changeTimer);
+								changeTimer = setTimeout(function(){
+									that.sWidth = document.documentElement.clientWidth;
+									that.setScale();
+								},500)
+							}
+							window.onresize = function(){
+								if(initOrientation !== window.orientation){
+									initOrientation = window.orientation;
+									return false;
+								}
+								that.resetScale();
+								changeTimer&&clearTimeout(changeTimer);
+								changeTimer = setTimeout(function(){
+									that.sWidth = document.documentElement.clientWidth;
+									that.setScale();
+								},500)
+							}
+							that.setScale();
+						}else{
+							if(navigator.userAgent.indexOf("Firefox")!==-1){
+								document.documentElement.style.transform = "scale("+that.webWidth/that.deWidth+")";
+							}else{
+								document.documentElement.style.zoom = that.webWidth/that.deWidth;
+							}
+						}
+					},
+					setScale:function(){
+						var that = this;
+						if(that.sWidth/that.deWidth<=1){
+							if(navigator.userAgent.match(/Android (\d+\.\d+)/)){
+								document.documentElement.style.zoom = that.sWidth/that.deWidth;
+							}else{
+								var meta = document.createElement("meta");
+								meta.setAttribute("name","viewport");
+								meta.setAttribute("content","width=device-width,initial-scale="+(that.sWidth/that.deWidth)+",user-scalable=no");
+								document.querySelector("[name=viewport]").remove();
+								document.head.appendChild(meta);
+							}
 							
-							document.querySelector("[name=viewport]").remove();
-							document.head.appendChild(meta);
-		}
-		if(navigator.userAgent.indexOf("Mobile")!==-1){
-			window.onorientationchange = function(){
-				that.resetScale();
-				changeTimer&&clearTimeout(changeTimer);
-				changeTimer = setTimeout(function(){
-					that.sWidth = document.documentElement.clientWidth;
-					taht.setScale();
-				},500)
-			}
-			that.setScale();
-		}else{
-			if(navigator.userAgent.indexOf("Firefox")!==-1){
-				document.documentElement.style.transform = "scale("+that.webWidth/that.deWidth+")";
-			}else{
-				document.documentElement.style.zoom = that.webWidth/that.deWidth;
-			}
-		}
-	},
-	setScale:function(){
-		var that = this;
-		if(that.sWidth/that.deWidth<=1){
-			if(navigator.userAgent.match(/Android (\d+\.\d+)/)){
-				document.documentElement.style.zoom = that.sWidth/that.deWidth;
-			}else{
-				var meta = document.createElement("meta");
-				meta.setAttribute("name","viewport");
-				meta.setAttribute("content","width=device-width,initial-scale="+(that.sWidth/that.deWidth)+",user-scalable=no");
-				document.querySelector("[name=viewport]").remove();
-				document.head.appendChild(meta);
-			}
-			
-			
-		}
-	},
-	resetScale:function(){
-		document.documentElement.style.zoom = 1;
-		var meta = document.createElement("meta");
-		meta.setAttribute("name","viewport");
-		meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no");
-		document.querySelector("[name=viewport]").remove();
-		document.head.appendChild(meta);
-					
-	}
-}
+							
+						}
+					},
+					resetScale:function(){
+						document.documentElement.style.zoom = 1;
+						var meta = document.createElement("meta");
+						meta.setAttribute("name","viewport");
+						meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no");
+						document.querySelector("[name=viewport]").remove();
+						document.head.appendChild(meta);
+									
+					}
+				}
 			Scale.init(1080,540)
 		</script>
 	
