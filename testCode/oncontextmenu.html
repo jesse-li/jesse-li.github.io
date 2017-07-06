@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.menu{
+				position: absolute;
+				display: none;
+				width: 100px;
+				height: 300px;
+				background-color: #fff;
+			}
+			.show{
+				top: 0;
+				left: 0;
+				display: none;
+				position: fixed;
+				width: 100%;
+				
+				background-color: rgba(0,0,0,.5);
+			}
+		</style>
+	</head>
+	<body>
+		
+		<ul>
+			<li><img class="test" src="img/test.gif"/></li>
+			<li><img class="test" src="img/test.jpg"/></li>
+		</ul>
+		<div class="menu">
+			<a href="javascript:void(0)" target="_self">打开</a>
+		</div>
+		<div class="show">
+			<img src=""/>
+		</div>
+		<!--监听右键事件-->
+		<script src="js/tools.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(".test",true).eventsBind("contextmenu",function(event){
+				var that = this,ev = event || window.event;
+				ev.preventDefault();
+				$(".menu").style.top = ev.pageY+"px";
+				$(".menu").style.left = ev.pageX+"px";
+				$(".menu").style.display = "block";
+				$(".menu").dataset.showimg = that.src;
+			})
+			$(".menu").xFind("a").eventsBind("click",function(){
+				$(".show").xFind("img")[0].src = $(".menu").dataset.showimg;
+				$(".show").style.display = "block";
+			})
+		</script>
+	</body>
+</html>
