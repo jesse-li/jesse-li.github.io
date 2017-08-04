@@ -2,130 +2,16 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,target-densitydpi=device-dpi" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="renderer" content="webkit" />
 		<meta name="wap-font-scale"content="no" />
 		<meta name="Keywords" content=""/>
 		<meta name="Description" content=""/>
 		<title></title>
+		<script src="js/scale_4e8a5b5.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			/*这种设计模式下，移动端需要使用meta来缩放，web端需要使用zoom来缩放
-			 	 页面所有元素都必须按照设计图的尺寸来固定
-			  web端的缩放比例，预计的显示宽度/设计图的宽度
-			  android 4.4以下对viewport缩放支持不太好，使用zoom配合target-densitydpi=device-dpi来缩放
-			  	魅族手机使用viewport缩放有点问题,需要使用上面的方法处理
-			  	
-			  	手机旋转时，android系浏览器和safari获取视窗的不同
-			  	
-			  	假如android和safari的size都是320*640
-			  	
-			  	在竖屏模式下   window.screen.width  window.screen.height
-			  	android  320                  640
-			  	safari   320                  640
-			  	
-			  	在横屏模式下   window.screen.width  window.screen.height
-			  	android  640                  320
-			  	safari   320                  640
-			  	
-			 	上面的问题，等有空再修复，这个版本暂时不用(已修复)
-			  	
-			  	在orientationchange的回调里增加一个定时器，解决某些低端安卓机获取可视区信息延迟的问题
-			  	
-			  	firefox不支持zoom，使用scale兼容
-			  	解决在某些内嵌页下，screen输出的是设备的分辨率，而不是可视区的宽度
-			  	window.screen.width ===document.documentElement.clientWidth?window.screen.width:window.screen.width/window.devicePixelRatio;
-			  	
-			  	大更新，由于window.screen在某些内嵌页下，返回的是设备的物理分辨率，并不是我们想要的设备可视区的信息，这样导致缩放比例出错，统一使用documen.documentElement.clientWidth和documen.documentElement.clientHeight。
-			  	在resize的时候还原zoom或者meta 重新去获取正确的视窗信息（因为缩放的原因，拿到的size是被放大了，之所以不记录缩放系数，因为有可能导致精度问题）
-			  	
-			  	
-			 **/
-			
-			/*2017-07-03 upDate
-			 缩放规则更改
-			 在安卓设备(4.4以上)上统一使用zoom来缩放(meta,target-densitydpi=device-dpi在某些内核下会自带缩放,即使没有设置initial-scale)
-			 
-			 安卓设备(4.4以下)使用zoom + target-densitydpi=device-dpi
-			 
-			 非安卓的设置使用<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />来缩放
-			 
-			 不使用target-densitydpi=device-dpi可能会引起一些问题,待观察*/
-			
-			//alert(navigator.userAgent)
-			
-			/*alert(window.orientation)*/
-var Scale = {
-					init:function(deWidth,webWidth){
-						var that = this,changeTimer = null,initOrientation = window.orientation;
-						that.sWidth = document.documentElement.clientWidth;
-						that.deWidth = deWidth;
-						that.webWidth = webWidth;
-						if(navigator.userAgent.match(/Android (\d+\.\d+)/)&&(parseFloat(navigator.userAgent.match(/Android (\d+\.\d+)/)[1])<4.4)){
-										var meta = document.createElement("meta");
-											meta.setAttribute("name","viewport");
-											meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no,target-densitydpi=device-dpi");
-											
-											document.querySelector("[name=viewport]").remove();
-											document.head.appendChild(meta);
-						}
-						if(navigator.userAgent.indexOf("Mobile")!==-1){
-							window.onorientationchange = function(){
-								that.resetScale();
-								changeTimer&&clearTimeout(changeTimer);
-								changeTimer = setTimeout(function(){
-									that.sWidth = document.documentElement.clientWidth;
-									that.setScale();
-								},500)
-							}
-							window.onresize = function(){
-								if(initOrientation !== window.orientation){
-									initOrientation = window.orientation;
-									return false;
-								}
-								that.resetScale();
-								changeTimer&&clearTimeout(changeTimer);
-								changeTimer = setTimeout(function(){
-									that.sWidth = document.documentElement.clientWidth;
-									that.setScale();
-								},500)
-							}
-							that.setScale();
-						}else{
-							if(navigator.userAgent.indexOf("Firefox")!==-1){
-								document.documentElement.style.transform = "scale("+that.webWidth/that.deWidth+")";
-							}else{
-								document.documentElement.style.zoom = that.webWidth/that.deWidth;
-							}
-						}
-					},
-					setScale:function(){
-						var that = this;
-						if(that.sWidth/that.deWidth<=1){
-							if(navigator.userAgent.match(/Android (\d+\.\d+)/)){
-								document.documentElement.style.zoom = that.sWidth/that.deWidth;
-							}else{
-								var meta = document.createElement("meta");
-								meta.setAttribute("name","viewport");
-								meta.setAttribute("content","width=device-width,initial-scale="+(that.sWidth/that.deWidth)+",user-scalable=no");
-								document.querySelector("[name=viewport]").remove();
-								document.head.appendChild(meta);
-							}
-							
-							
-						}
-					},
-					resetScale:function(){
-						document.documentElement.style.zoom = 1;
-						var meta = document.createElement("meta");
-						meta.setAttribute("name","viewport");
-						meta.setAttribute("content","width=device-width,initial-scale=1,user-scalable=no");
-						document.querySelector("[name=viewport]").remove();
-						document.head.appendChild(meta);
-									
-					}
-				}
-			Scale.init(1080,540)
+			Scale.init(1080,540,true);
 		</script>
 	
     <link rel="stylesheet" type="text/css" href="pkg/index_aio_28cfc73.css" />
