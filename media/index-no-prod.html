@@ -100,7 +100,7 @@
         {name:"10号影院",url:"http://player.gakui.top/?url="},
         {name:"PPYPP",url:"http://www.ppypp.com/yunparse/?url="},
         {name:"疯狂解析",url:"http://vip.ifkdy.com/?url=",title:"仅是简单嵌了47影视云、小海解析等几个解析站"},
-    ]
+    ];
 		document.getElementById("selectBox").innerHTML = cracks.map(function(obj,index){
 			var title = obj.title?"("+obj.title+")":"";
 			var curr = index === 0?"selected":"";
@@ -115,7 +115,7 @@
 			 	return false;
 			 }
 			window.open(document.getElementById("selectBox").value+document.getElementById("address").value.trim(),"_target")
-		},false)
+		},false);
 		</script>
 	</body>
 </html>
